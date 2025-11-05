@@ -1,0 +1,46 @@
+# Default values for Pelican Panel Helm Chart
+# This is a YAML-formatted file.
+
+# Number of Pelican Panel replicas to start. Should be left at 1.
+replicaCount: 1
+
+# Image pull secrets to authenticate with private repositories.
+# This is for the secrets for pulling an image from a private repository more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+imagePullSecrets: []
+
+image:
+  # Container image repository for Pelican Panel.
+  repository: ghcr.io/pelican-dev/panel
+  # Pelican Panel container image tag. Leave empty to automatically use the Chart's app version.
+  tag: ""
+  # Image pull policy (Alyways, IfNotPresent or Never).
+  pullPolicy: IfNotPresent
+
+# This is to override the chart name.
+nameOverride: ""
+fullnameOverride: ""
+
+# This is for setting up a service more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/
+service:
+  # This sets the service type more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
+  type: ClusterIP
+  # This sets the ports more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#field-spec-ports
+  port: 80
+
+persistence:
+  data:
+    enabled: true
+    accessMode: ReadWriteOnce
+    size: 1Gi
+    storageClassName: ''
+  logs:
+    enabled: true
+    accessMode: ReadWriteOnce
+    size: 1Gi
+    storageClassName: ''
+
+caddy:
+  admin: off
+  trusted_proxies: proxy_ip
+  upload_max_filesize: ''
+  post_max_size: ''
