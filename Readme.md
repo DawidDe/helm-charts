@@ -1,1 +1,0 @@
-A Helm Chart for the Pelican Panel
