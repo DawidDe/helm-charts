@@ -24,6 +24,7 @@ spec:
               mountPath: /var/www/html/storage/logs
             - name: caddyfile
               mountPath: /etc/caddy/Caddyfile
+              subPath: caddyfile
               readOnly: true
       volumes:
         - name: data
