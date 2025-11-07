@@ -33,5 +33,5 @@ spec:
           persistentVolumeClaim:
             claimName: "{{ .Release.Name }}-logs"
         - name: caddyfile
-          persistentVolumeClaim:
+          configMap:
             claimName: "{{ .Release.Name }}-caddyfile"
