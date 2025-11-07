@@ -34,4 +34,4 @@ spec:
             claimName: "{{ .Release.Name }}-logs"
         - name: caddyfile
           configMap:
-            claimName: "{{ .Release.Name }}-caddyfile"
+            name: "{{ .Release.Name }}-caddyfile"
