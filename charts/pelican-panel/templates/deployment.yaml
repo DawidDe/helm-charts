@@ -12,16 +12,17 @@ spec:
       labels:
         app: "{{ .Release.Name }}"
     spec:
-      securityContext:
-        fsGroup: 82
       initContainers:
         - name: init-pelican-data
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           command: ["/bin/sh", "-c"]
           args:
             - |
+              chown -R 82:82 /data-pv
               sleep 60
               cp -r /pelican-data/* /data-pv
+          securityContext:
+            runAsUser: 0
           volumeMounts:
             - name: data
               mountPath: /data-pv
