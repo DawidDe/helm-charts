@@ -12,9 +12,22 @@ spec:
       labels:
         app: "{{ .Release.Name }}"
     spec:
+      initContainers:
+        - name: init-pelican-data
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              sleep 60
+              cp -r /pelican-data/* /data-pv
+          volumeMounts:
+            - name: init
+              mountPath: /pelican-data
+            - name: data
+              mountPath: /data-pv
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion}}"
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           ports:
             - containerPort: 80
           volumeMounts:
@@ -27,6 +40,9 @@ spec:
               subPath: caddyfile
               readOnly: true
       volumes:
+        - name: init
+          emptyDir:
+            medium: Memory
         - name: data
           persistentVolumeClaim:
             claimName: "{{ .Release.Name }}-data"
