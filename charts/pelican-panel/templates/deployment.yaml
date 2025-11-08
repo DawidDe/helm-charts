@@ -19,6 +19,7 @@ spec:
           args:
             - |
               chown -R 82:82 /data-pv
+              chown -R 82:82 /log-pv
               sleep 60
               cp -r /pelican-data/* /data-pv
           securityContext:
@@ -26,6 +27,8 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /data-pv
+            - name: logs
+              mountPath: /log-pv
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
