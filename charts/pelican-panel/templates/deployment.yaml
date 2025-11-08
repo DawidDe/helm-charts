@@ -12,6 +12,8 @@ spec:
       labels:
         app: "{{ .Release.Name }}"
     spec:
+      securityContext:
+        fsGroup: 82
       initContainers:
         - name: init-pelican-data
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
