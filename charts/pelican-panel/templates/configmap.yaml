@@ -5,9 +5,9 @@ metadata:
 data:
   caddyfile: |
     {
-      admin {{ .Values.caddy.admin }}
+      admin {{ .Values.general.caddy.admin }}
       servers {
-        trusted_proxies static {{ .Values.caddy.trusted_proxies }}
+        trusted_proxies static {{ .Values.general.caddy.trusted_proxies }}
       }
     }
 
@@ -16,8 +16,8 @@ data:
       encode gzip
 
       php_fastcgi 127.0.0.1:9000 {
-          env PHP_VALUE "upload_max_filesize = {{ .Values.caddy.upload_max_filesize | default 2 }}M
-                         post_max_size = {{ .Values.caddy.post_max_size | default 8 }}M"
+          env PHP_VALUE "upload_max_filesize = {{ .Values.general.caddy.upload_max_filesize | default 2 }}M
+                         post_max_size = {{ .Values.general.caddy.post_max_size | default 8 }}M"
       }
       file_server
     }

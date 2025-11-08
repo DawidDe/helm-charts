@@ -4,11 +4,11 @@ metadata:
   name: "{{ .Release.Name }}-data"
 spec:
   accessModes:
-    - {{ .Values.persistence.data.accessMode }}
+    - {{ .Values.volumes.data.accessMode }}
   resources:
     requests:
-      storage: {{ .Values.persistence.data.size }}
-  storageClassName: {{ .Values.persistence.data.storageClassName }}
+      storage: {{ .Values.volumes.data.size }}
+  storageClassName: {{ .Values.volumes.data.storageClassName }}
 
 ---
 apiVersion: v1
@@ -17,8 +17,8 @@ metadata:
   name: "{{ .Release.Name }}-logs"
 spec:
   accessModes:
-    - {{ .Values.persistence.logs.accessMode }}
+    - {{ .Values.volumes.logs.accessMode }}
   resources:
     requests:
-      storage: {{ .Values.persistence.logs.size }}
-  storageClassName: {{ .Values.persistence.logs.storageClassName }}
+      storage: {{ .Values.volumes.logs.size }}
+  storageClassName: {{ .Values.volumes.logs.storageClassName }}
