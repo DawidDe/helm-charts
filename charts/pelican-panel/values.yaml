@@ -40,7 +40,7 @@ persistence:
     storageClassName: ''
 
 caddy:
-  admin: off
+  admin: "off"
   # The IP of your reverse proxy
   trusted_proxies: proxy_ip
   # When leaving these settings empty its using the standard settings
