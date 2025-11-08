@@ -21,8 +21,6 @@ spec:
               sleep 60
               cp -r /pelican-data/* /data-pv
           volumeMounts:
-            - name: init
-              mountPath: /pelican-data
             - name: data
               mountPath: /data-pv
       containers:
@@ -40,9 +38,6 @@ spec:
               subPath: caddyfile
               readOnly: true
       volumes:
-        - name: init
-          emptyDir:
-            medium: Memory
         - name: data
           persistentVolumeClaim:
             claimName: "{{ .Release.Name }}-data"
