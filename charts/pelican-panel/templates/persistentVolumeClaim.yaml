@@ -8,7 +8,7 @@ spec:
   resources:
     requests:
       storage: {{ .Values.volumes.data.size }}
-  storageClassName: {{ .Values.volumes.data.storageClassName }}
+  storageClassName: {{ .Values.volumes.data.storageClassName | default .Values.volumes.sharedStorageClassName }}
 
 ---
 apiVersion: v1
@@ -21,4 +21,4 @@ spec:
   resources:
     requests:
       storage: {{ .Values.volumes.logs.size }}
-  storageClassName: {{ .Values.volumes.logs.storageClassName }}
+  storageClassName: {{ .Values.volumes.logs.storageClassName | default .Values.volumes.sharedStorageClassName }}

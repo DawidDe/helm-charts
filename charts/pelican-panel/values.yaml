@@ -1,38 +1,31 @@
 # Default values for Pelican Panel Helm Chart
-# This is a YAML-formatted file.
+# Leave settings that you dont know. Every change you need to make is documented.
 
 general:
-  fullnameOverride: ""
-  nameOverride: ""
-  domain: "pelican.test.dawidde.de"
+  domain: "domain" # Change to your domain.
   caddy:
-    admin: "off"
-    # The IP of your reverse proxy
-    trusted_proxies: proxy_ip
-    # When leaving these settings empty its using the standard settings
-    upload_max_filesize: ''
-    post_max_size: ''
+    admin: "" # Turns of the admin api of caddy. Default is off.
+    trusted_proxies: "proxy-ip" # Replace with the ip of your proxy.
+    upload_max_filesize: "" # Overwrites the default max file upload size in caddy. Default is 2M.
+    post_max_size: "" # Overwrites the default max size for post requests in Caddy. Default is 8M.
 
 image:
-  # Container image repository for Pelican Panel.
-  repository: ghcr.io/pelican-dev/panel
-  # Pelican Panel container image tag. Leave empty to automatically use the Chart's app version.
-  tag: ""
-  # Image pull policy (Alyways, IfNotPresent or Never).
-  pullPolicy: IfNotPresent
+  overwriteRepository: "" # Overwrites the repository for the container. Default is ghcr.io/pelican-dev/panel.
+  overwriteTag: "" # Overwrites the container version. Default is v1.0.0-beta27.
+  overwriteImagePullPolicy: "" # Overwrites the image pull policy. Default is IfNotPresent. IfNotPresent/Always/Never
 
 service:
-  type: ClusterIP
+  type: "ClusterIP"
   port: 80
 
+# These are only the pvc's. You still need to provides pv's.
 volumes:
+  sharedStorageClassName: "storage-class"
   data:
-    enabled: true
-    accessMode: ReadWriteOnce
-    size: 1Gi
-    storageClassName: ''
+    accessMode: "ReadWriteOnce"
+    size: "1Gi"
+    #overwriteStorageClassName: "" # Overwrites the sharedStorageClassName for this pvc. Uncomment to overwrite.
   logs:
-    enabled: true
-    accessMode: ReadWriteOnce
-    size: 1Gi
-    storageClassName: ''
+    accessMode: "ReadWriteOnce"
+    size: "1Gi" 
+    #overwriteStorageClassName: "" # Overwrites the sharedStorageClassName for this pvc. Uncomment to overwrite.

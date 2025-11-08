@@ -5,7 +5,7 @@ metadata:
 data:
   caddyfile: |
     {
-      admin {{ .Values.general.caddy.admin }}
+      admin {{ .Values.general.caddy.admin | default off }}
       servers {
         trusted_proxies static {{ .Values.general.caddy.trusted_proxies }}
       }
