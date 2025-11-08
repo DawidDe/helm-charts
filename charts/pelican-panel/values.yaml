@@ -4,7 +4,7 @@
 general:
   fullnameOverride: ""
   nameOverride: ""
-  domain: "yourdomain"
+  domain: "pelican.test.dawidde.de"
   caddy:
     admin: "off"
     # The IP of your reverse proxy
