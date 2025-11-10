@@ -53,7 +53,7 @@ general:
 
 image:
   overwriteRepository: "" # Overwrites the repository for the container. Default is ghcr.io/pelican-dev/panel.
-  overwriteTag: "" # Overwrites the container version. Default is v1.0.0-beta27.
+  overwriteTag: "" # Overwrites the container version. Default is v1.0.0-beta28.
   overwriteImagePullPolicy: "" # Overwrites the image pull policy. Default is IfNotPresent. IfNotPresent/Always/Never
 
 service:
