@@ -2,12 +2,11 @@
 # Leave settings that you dont know. Every change you need to make is documented.
 
 general:
-  domain: "domain" # Change to your domain.
-  caddy:
-    admin: "" # Turns of the admin api of caddy. Default is off.
-    trusted_proxies: "proxy-ip" # Replace with the ip of your proxy.
-    upload_max_filesize: "" # Overwrites the default max file upload size in caddy. Default is 2M.
-    post_max_size: "" # Overwrites the default max size for post requests in Caddy. Default is 8M.
+  domain: "https://pelican.domain.com" # Change to your domain.
+  email: "email" # Change to the email you wanna use for lets encrypt certificates.
+  debug: "false"
+  behind_proxy: "true"
+  trusted_proxies: "ip"
 
 image:
   overwriteRepository: "" # Overwrites the repository for the container. Default is ghcr.io/pelican-dev/panel.
@@ -20,7 +19,7 @@ service:
 
 # These are only the pvc's. You still need to provides pv's.
 volumes:
-  sharedStorageClassName: "storage-class"
+  sharedStorageClassName: "local-path"
   data:
     accessMode: "ReadWriteOnce"
     size: "1Gi"

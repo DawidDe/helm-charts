@@ -14,8 +14,8 @@ spec:
     spec:
       initContainers:
         - name: init-pelican-data
-          image: "{{ .Values.image.repository | default ghcr.io/pelican-dev/panel }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy | default IfNotPresent }}
+          image: "{{ .Values.image.repository | default "ghcr.io/pelican-dev/panel" }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy | default "IfNotPresent" }}
           command: ["/bin/sh", "-c"]
           args:
             - |
@@ -32,21 +32,25 @@ spec:
               mountPath: /log-pv
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          image: "{{ .Values.image.repository | default "ghcr.io/pelican-dev/panel" }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           ports:
             - containerPort: 80
           env:
             - name: APP_URL
-              value: {{ .Values.general.domain }}
+              value: {{ .Values.general.domain | quote }}
+            - name: LE_EMAIL
+              value: {{ .Values.general.email | quote }}
+            - name: APP_DEBUG
+              value: {{ .Values.general.debug | quote }}
+            - name: BEHIND_PROXY
+              value: {{ .Values.general.behind_proxy | quote }}
+            - name: TRUSTED_PROXIES
+              value: {{ .Values.general.trusted_proxies | quote }}
           volumeMounts:
             - name: data
               mountPath: /pelican-data
             - name: logs
               mountPath: /var/www/html/storage/logs
-            - name: caddyfile
-              mountPath: /etc/caddy/Caddyfile
-              subPath: caddyfile
-              readOnly: true
       volumes:
         - name: data
           persistentVolumeClaim:
@@ -54,6 +58,3 @@ spec:
         - name: logs
           persistentVolumeClaim:
             claimName: "{{ .Release.Name }}-logs"
-        - name: caddyfile
-          configMap:
-            name: "{{ .Release.Name }}-caddyfile"
