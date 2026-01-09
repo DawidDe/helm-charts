@@ -12,24 +12,6 @@ spec:
       labels:
         app: "{{ .Release.Name }}"
     spec:
-      initContainers:
-        - name: init-pelican-data
-          image: "{{ .Values.image.repository | default "ghcr.io/pelican-dev/panel" }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy | default "IfNotPresent" }}
-          command: ["/bin/sh", "-c"]
-          args:
-            - |
-              chown -R 82:82 /data-pv
-              chown -R 82:82 /log-pv
-              sleep 60
-              cp -r /pelican-data/* /data-pv
-          securityContext:
-            runAsUser: 0
-          volumeMounts:
-            - name: data
-              mountPath: /data-pv
-            - name: logs
-              mountPath: /log-pv
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository | default "ghcr.io/pelican-dev/panel" }}:{{ .Values.image.tag | default .Chart.AppVersion }}"

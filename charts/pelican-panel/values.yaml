@@ -19,7 +19,7 @@ service:
 
 # These are only the pvc's. You still need to provides pv's.
 volumes:
-  sharedStorageClassName: "local-path"
+  sharedStorageClassName: "storageClassName"
   data:
     accessMode: "ReadWriteOnce"
     size: "1Gi"
