@@ -15,7 +15,7 @@ general:
 image:
   # Container image repository override. Default: ghcr.io/pelican-dev/panel
   overwriteRepository: ""
-  # Container image tag override. Default: v1.0.0-beta27
+  # Container image tag override. Default: v1.0.0-beta29
   overwriteTag: ""
   # Image pull policy override. Default: IfNotPresent
   # Options: IfNotPresent / Always / Never
