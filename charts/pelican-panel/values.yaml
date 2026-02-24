@@ -1,30 +1,47 @@
-# Default values for Pelican Panel Helm Chart
-# Leave settings that you dont know. Every change you need to make is documented.
+# Default values for the Pelican Panel Helm Chart
+# Leave settings you are unsure about as-is. All required changes are documented.
 
 general:
-  domain: "https://pelican.domain.com" # Change to your domain.
-  email: "email" # Change to the email you wanna use for lets encrypt certificates.
-  debug: "false"
-  behind_proxy: "true"
-  trusted_proxies: "ip"
+  # Domain for your Pelican Panel instance.
+  domain: "https://pelican.domain.com"
+  # Email used by Caddy for SSL certificate issuance via Let's Encrypt.
+  # Only set if Caddy handles SSL termination.
+  email: "email"
+  # Required when Caddy is running behind another proxy.
+  behindProxy: "true"
+  # IP address of the proxy that Caddy should trust.
+  trustedProxies: "ip"
 
 image:
-  overwriteRepository: "" # Overwrites the repository for the container. Default is ghcr.io/pelican-dev/panel.
-  overwriteTag: "" # Overwrites the container version. Default is v1.0.0-beta27.
-  overwriteImagePullPolicy: "" # Overwrites the image pull policy. Default is IfNotPresent. IfNotPresent/Always/Never
+  # Container image repository override. Default: ghcr.io/pelican-dev/panel
+  overwriteRepository: ""
+  # Container image tag override. Default: v1.0.0-beta27
+  overwriteTag: ""
+  # Image pull policy override. Default: IfNotPresent
+  # Options: IfNotPresent / Always / Never
+  overwriteImagePullPolicy: ""
 
 service:
+  # Kubernetes service type. Default: ClusterIP
   type: "ClusterIP"
+  # Service port
   port: 80
 
-# These are only the pvc's. You still need to provides pv's.
+# Persistent Volume Claims (PVCs). You must provide corresponding Persistent Volumes (PVs).
 volumes:
+  # Default storage class for PVCs
   sharedStorageClassName: "storageClassName"
   data:
+    # PVC access mode
     accessMode: "ReadWriteOnce"
+    # PVC size
     size: "1Gi"
-    #overwriteStorageClassName: "" # Overwrites the sharedStorageClassName for this pvc. Uncomment to overwrite.
+    # Optional override for storage class. Uncomment to use.
+    # overwriteStorageClassName: ""
   logs:
+    # PVC access mode
     accessMode: "ReadWriteOnce"
-    size: "1Gi" 
-    #overwriteStorageClassName: "" # Overwrites the sharedStorageClassName for this pvc. Uncomment to overwrite.
+    # PVC size
+    size: "1Gi"
+    # Optional override for storage class. Uncomment to use.
+    # overwriteStorageClassName: ""
