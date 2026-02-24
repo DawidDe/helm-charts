@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.overwriteRepository | default 'ghcr.io/pelican-dev/panel' }}:{{ .Values.image.overwriteTag | default .Chart.AppVersion }}"
+          image: "{{ .Values.image.overwriteRepository | default "ghcr.io/pelican-dev/panel" }}:{{ .Values.image.overwriteTag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.overwriteImagePullPolicy | default "IfNotPresent" }}
           ports:
             - containerPort: 80
