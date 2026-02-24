@@ -3,6 +3,16 @@ entries:
   pelican-panel:
   - apiVersion: v2
     appVersion: v1.0.0-beta29
+    created: "2026-02-24T15:13:45.549313327Z"
+    description: A Helm chart for the Pelican Panel
+    digest: 74aa857668e2ec8200c7a620db4844d2f50d238165a2b97bd2a13fdd5d9aa159
+    name: pelican-panel
+    type: application
+    urls:
+    - https://github.com/DawidDe/helm-charts/releases/download/pelican-panel-2.0.0/pelican-panel-2.0.0.tgz
+    version: 2.0.0
+  - apiVersion: v2
+    appVersion: v1.0.0-beta29
     created: "2026-01-09T20:13:36.93782068Z"
     description: A Helm chart for the Pelican Panel
     digest: 503cf2a4190d2b337152e7b5ded6b148f1bffa48f791ed35a7950e7d901adec4
@@ -191,4 +201,4 @@ entries:
     urls:
     - https://github.com/DawidDe/helm-charts/releases/download/pelican-panel-0.1.4/pelican-panel-0.1.4.tgz
     version: 0.1.4
-generated: "2026-01-09T20:13:36.937939041Z"
+generated: "2026-02-24T15:13:45.549471792Z"
