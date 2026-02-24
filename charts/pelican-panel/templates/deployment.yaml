@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository | default "ghcr.io/pelican-dev/panel" }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          image: "{{ .Values.image.overwriteRepository | default 'ghcr.io/pelican-dev/panel' }}:{{ .Values.image.overwriteTag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.overwriteImagePullPolicy | default "IfNotPresent" }}
           ports:
             - containerPort: 80
           env:
@@ -22,12 +23,10 @@ spec:
               value: {{ .Values.general.domain | quote }}
             - name: LE_EMAIL
               value: {{ .Values.general.email | quote }}
-            - name: APP_DEBUG
-              value: {{ .Values.general.debug | quote }}
             - name: BEHIND_PROXY
-              value: {{ .Values.general.behind_proxy | quote }}
+              value: {{ .Values.general.behindProxy | quote }}
             - name: TRUSTED_PROXIES
-              value: {{ .Values.general.trusted_proxies | quote }}
+              value: {{ .Values.general.trustedProxies | quote }}
           volumeMounts:
             - name: data
               mountPath: /pelican-data
