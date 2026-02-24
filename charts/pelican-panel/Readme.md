@@ -37,42 +37,6 @@ There are two ways to do this:
 Add your storage class name to the `volumes.sharedStorageClassName` field.  
 If you prefer to use separate storage classes, skip this field and uncomment the individual `overwriteStorageClassName` entries instead.
 
-#### Example `values.yaml`:
-
-```yaml
-# Default values for Pelican Panel Helm Chart
-# Leave settings that you dont know. Every change you need to make is documented.
-
-general:
-  domain: "domain" # Change to your domain.
-  caddy:
-    admin: "" # Turns of the admin api of caddy. Default is off.
-    trusted_proxies: "proxy-ip" # Replace with the ip of your proxy.
-    upload_max_filesize: "" # Overwrites the default max file upload size in caddy. Default is 2M.
-    post_max_size: "" # Overwrites the default max size for post requests in Caddy. Default is 8M.
-
-image:
-  overwriteRepository: "" # Overwrites the repository for the container. Default is ghcr.io/pelican-dev/panel.
-  overwriteTag: "" # Overwrites the container version. Default is v1.0.0-beta28.
-  overwriteImagePullPolicy: "" # Overwrites the image pull policy. Default is IfNotPresent. IfNotPresent/Always/Never
-
-service:
-  type: "ClusterIP"
-  port: 80
-
-# These are only the pvc's. You still need to provides pv's.
-volumes:
-  sharedStorageClassName: "storage-class"
-  data:
-    accessMode: "ReadWriteOnce"
-    size: "1Gi"
-    #overwriteStorageClassName: "" # Overwrites the sharedStorageClassName for this pvc. Uncomment to overwrite.
-  logs:
-    accessMode: "ReadWriteOnce"
-    size: "1Gi" 
-    #overwriteStorageClassName: "" # Overwrites the sharedStorageClassName for this pvc. Uncomment to overwrite.
-```
-
 ### 3. Install the Chart
 
 Install the chart with the following command:

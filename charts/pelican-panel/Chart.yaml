@@ -3,4 +3,4 @@ name: pelican-panel
 description: A Helm chart for the Pelican Panel
 type: application
 version: 2.0.0
-appVersion: "v1.0.0-beta29"
+appVersion: "v1.0.0-beta33"
