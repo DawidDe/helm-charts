@@ -11,11 +11,6 @@ spec:
     metadata:
       labels:
         app: "{{ .Release.Name }}"
-    spec:
-      containers:
-        - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.overwriteRepository | default "ghcr.io/pelican-dev/panel" }}:{{ .Values.image.overwriteTag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.overwriteImagePullPolicy | default "IfNotPresent" }}
      spec:
        securityContext:
          fsGroup: 82
