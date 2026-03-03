@@ -16,6 +16,9 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.overwriteRepository | default "ghcr.io/pelican-dev/panel" }}:{{ .Values.image.overwriteTag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.overwriteImagePullPolicy | default "IfNotPresent" }}
+          securityContext:
+            fsGroup: 82
+            fsGroupChangePolicy: "OnRootMismatch"
           ports:
             - containerPort: 80
           env:
