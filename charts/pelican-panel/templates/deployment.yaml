@@ -11,15 +11,14 @@ spec:
     metadata:
       labels:
         app: "{{ .Release.Name }}"
-     spec:
-       securityContext:
-         fsGroup: 82
-         fsGroupChangePolicy: "OnRootMismatch"
-       containers:
-         - name: {{ .Chart.Name }}
-           image: "{{ .Values.image.overwriteRepository | default "ghcr.io/pelican-dev/panel" }}:{{ .Values.image.overwriteTag | default .Chart.AppVersion }}"
-           imagePullPolicy: {{ .Values.image.overwriteImagePullPolicy | default "IfNotPresent" }}
-           ports:
+    spec:
+      securityContext:
+        fsGroup: 82
+        fsGroupChangePolicy: "OnRootMismatch"
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.overwriteRepository | default "ghcr.io/pelican-dev/panel" }}:{{ .Values.image.overwriteTag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.overwriteImagePullPolicy | default "IfNotPresent" }}
           ports:
             - containerPort: 80
           env:
